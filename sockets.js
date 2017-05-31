@@ -137,7 +137,9 @@ module.exports = function (server, config) {
     }
 
     function clientsInRoom(name) {
-        return io.sockets.clients(name).length;
+        var adapter = io.nsps['/'].adapter;
+        var clients = adapter.rooms[name] || {};
+        return clients.length;
     }
 
 };
